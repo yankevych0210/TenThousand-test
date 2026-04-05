@@ -16,7 +16,7 @@ async function bootstrap(): Promise<void> {
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: false,
   });
-  const port = process.env.PORT ?? 3000;
+  const port = parseInt(process.env.PORT || "3000", 10);
   await app.listen(port, "0.0.0.0");
   console.log(`🚀 GraphQL server running at http://0.0.0.0:${port}/graphql`);
 }
