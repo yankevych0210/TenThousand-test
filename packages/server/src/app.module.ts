@@ -1,15 +1,23 @@
-import { Module } from "@nestjs/common";
+import { Module, Controller, Get } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { join } from "path";
 import { FormsModule } from "./forms/forms.module";
 import { ResponsesModule } from "./responses/responses.module";
 
+@Controller("/")
+class HealthController {
+  @Get()
+  health(): string {
+    return "Forms Lite API is running!";
+  }
+}
+
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), "schema.graphql"),
+      autoSchemaFile: true,
       sortSchema: true,
       playground: false,
       introspection: true,
@@ -17,5 +25,6 @@ import { ResponsesModule } from "./responses/responses.module";
     FormsModule,
     ResponsesModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}
