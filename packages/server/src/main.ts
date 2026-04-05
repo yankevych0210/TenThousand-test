@@ -4,19 +4,16 @@ import { AppModule } from "./app.module";
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  
+  // Allow all origins for the test task
   app.enableCors({
-    origin: (origin: string | undefined, callback: (err: Error | null, origin?: string | boolean) => void) => {
-      const allowed =
-        !origin ||
-        /^http:\/\/localhost(:\d+)?$/.test(origin) ||
-        /\.vercel\.app$/.test(origin);
-      callback(null, allowed ? origin : false);
-    },
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: false,
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    credentials: true,
   });
-  const port = parseInt(process.env.PORT || "3000", 10);
+
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+  
   await app.listen(port, "0.0.0.0");
   console.log(`🚀 GraphQL server running at http://0.0.0.0:${port}/graphql`);
 }
