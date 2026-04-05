@@ -20,7 +20,8 @@ interface GraphQLResponse<T> {
   errors?: GraphQLError[];
 }
 
-const GRAPHQL_URL = import.meta.env.VITE_GRAPHQL_URL || "http://localhost:3000/graphql";
+const RAW_URL = import.meta.env.VITE_GRAPHQL_URL || "http://localhost:3000/graphql";
+const GRAPHQL_URL = RAW_URL.endsWith("/graphql") ? RAW_URL : `${RAW_URL.replace(/\/$/, "")}/graphql`;
 
 const graphqlBaseQuery: BaseQueryFn<
   GraphQLRequestArgs,
