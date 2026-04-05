@@ -1,4 +1,11 @@
 {
-  "build": "pnpm install && pnpm --filter server build",
-  "start": "pnpm --filter server start"
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pnpm install && pnpm --filter server build"
+  },
+  "deploy": {
+    "startCommand": "pnpm --filter server start",
+    "restartPolicyType": "ON_FAILURE"
+  }
 }
