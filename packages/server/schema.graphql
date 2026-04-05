@@ -1,0 +1,133 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""A single answer to one question"""
+type Answer {
+  questionId: ID!
+
+  """
+  Unified answer array: TEXT/DATE = single-element, MULTIPLE_CHOICE = single-element, CHECKBOX = one or more. Empty array = skipped.
+  """
+  values: [String!]!
+}
+
+"""An answer to one question"""
+input AnswerInput {
+  questionId: ID!
+
+  """
+  Answer values — single-element for TEXT/DATE/MULTIPLE_CHOICE, multi for CHECKBOX
+  """
+  values: [String!]!
+}
+
+"""Input for creating a new form"""
+input CreateFormInput {
+  description: String
+  questions: [QuestionInput!]
+  title: String!
+}
+
+"""A form containing a list of questions"""
+type Form {
+  """ISO 8601 creation timestamp"""
+  createdAt: String!
+  description: String
+  id: ID!
+  questions: [Question!]!
+  title: String!
+}
+
+type Mutation {
+  """Creates a new form"""
+  createForm(input: CreateFormInput!): Form!
+
+  """Deletes a form by ID"""
+  deleteForm(id: ID!): String!
+
+  """Submits a new response for a form"""
+  submitResponse(input: SubmitResponseInput!): Response!
+
+  """Updates an existing form"""
+  updateForm(input: UpdateFormInput!): Form!
+}
+
+type Query {
+  """Returns a single form by its ID"""
+  form(id: ID!): Form!
+
+  """Returns all created forms, newest first"""
+  forms: [Form!]!
+
+  """Returns all responses submitted for a given form"""
+  responses(formId: ID!): [Response!]!
+}
+
+"""A single question in a form"""
+type Question {
+  id: ID!
+
+  """Options for MULTIPLE_CHOICE and CHECKBOX types"""
+  options: [String!]
+
+  """Whether this question is required"""
+  required: Boolean!
+
+  """The question prompt text"""
+  text: String!
+  type: QuestionType!
+}
+
+"""Input for creating a question"""
+input QuestionInput {
+  """Optional ID for updating existing questions"""
+  id: ID
+
+  """Options for MULTIPLE_CHOICE/CHECKBOX"""
+  options: [String!]
+  required: Boolean! = false
+
+  """The question prompt text"""
+  text: String!
+  type: QuestionType!
+}
+
+"""The type of a form question"""
+enum QuestionType {
+  """Multi-select checkboxes"""
+  CHECKBOX
+
+  """Date picker"""
+  DATE
+
+  """Single-select radio buttons"""
+  MULTIPLE_CHOICE
+
+  """Free-text input"""
+  TEXT
+}
+
+"""A submission response for a form"""
+type Response {
+  answers: [Answer!]!
+  formId: ID!
+  id: ID!
+
+  """ISO 8601 submission timestamp"""
+  submittedAt: String!
+}
+
+"""Input for submitting a form response"""
+input SubmitResponseInput {
+  answers: [AnswerInput!]!
+  formId: ID!
+}
+
+"""Data for updating an existing form"""
+input UpdateFormInput {
+  description: String
+  id: ID!
+  questions: [QuestionInput!]
+  title: String
+}

@@ -1,0 +1,23 @@
+query GetResponses($formId: ID!) {
+  responses(formId: $formId) {
+    id
+    formId
+    submittedAt
+    answers {
+      questionId
+      values
+    }
+  }
+}
+
+mutation SubmitResponse($input: SubmitResponseInput!) {
+  submitResponse(input: $input) {
+    id
+    formId
+    submittedAt
+    answers {
+      questionId
+      values
+    }
+  }
+}

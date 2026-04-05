@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-error-light);
+  border: 1.5px solid #fca5a5;
+  border-radius: var(--radius-md);
+}
+.icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+.title {
+  font-weight: 600;
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+}
+.message {
+  color: #b91c1c;
+  font-size: var(--font-size-sm);
+  margin-top: 2px;
+}

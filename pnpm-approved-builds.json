@@ -1,0 +1,5 @@
+{
+  "@apollo/protobufjs": true,
+  "esbuild": true,
+  "@nestjs/core": true
+}

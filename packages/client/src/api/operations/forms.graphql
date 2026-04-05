@@ -1,0 +1,63 @@
+query GetForms {
+  forms {
+    id
+    title
+    description
+    createdAt
+    questions {
+      id
+    }
+  }
+}
+
+query GetForm($id: ID!) {
+  form(id: $id) {
+    id
+    title
+    description
+    createdAt
+    questions {
+      id
+      text
+      type
+      options
+      required
+    }
+  }
+}
+
+mutation CreateForm($input: CreateFormInput!) {
+  createForm(input: $input) {
+    id
+    title
+    description
+    createdAt
+    questions {
+      id
+      text
+      type
+      options
+      required
+    }
+  }
+}
+
+mutation UpdateForm($input: UpdateFormInput!) {
+  updateForm(input: $input) {
+    id
+    title
+    description
+    createdAt
+    questions {
+      id
+      text
+      type
+      options
+      required
+    }
+  }
+}
+
+mutation DeleteForm($id: ID!) {
+  deleteForm(id: $id)
+}

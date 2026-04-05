@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+.spinner {
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  animation: spin 700ms linear infinite;
+}
+.sm {
+  width: 20px;
+  height: 20px;
+}
+.md {
+  width: 36px;
+  height: 36px;
+}
+.lg {
+  width: 52px;
+  height: 52px;
+  border-width: 4px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

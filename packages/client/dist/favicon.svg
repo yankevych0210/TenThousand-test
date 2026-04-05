@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <linearGradient id="secondaryGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6d28d9" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#6d28d9" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect x="10" y="10" width="80" height="80" rx="24" fill="url(#primaryGrad)" filter="url(#shadow)" />
+
+  <!-- Form Lines -->
+  <path d="M 30 35 h 40 M 30 50 h 40 M 30 65 h 25" 
+        stroke="#ffffff" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.95" />
+        
+  <!-- Floating Circle / Checkmark Area -->
+  <circle cx="70" cy="65" r="8" fill="#ffffff" />
+  <path d="M 67 65.5 l 2 2 l 4 -4" stroke="url(#secondaryGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+</svg>
