@@ -4,15 +4,21 @@ import { AppModule } from "./app.module";
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  // Extremely permissive CORS to solve the deployment blocker
   app.enableCors({
-    origin: true, // Reflect the requesting origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
+    origin: (origin: string | undefined, callback: (err: Error | null, origin?: string | boolean) => void) => {
+      const allowed =
+        !origin ||
+        /^http:\/\/localhost(:\d+)?$/.test(origin) ||
+        /\.vercel\.app$/.test(origin);
+      callback(null, allowed ? origin : false);
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false,
   });
-  const port = process.env.PORT || 3000;
-  await app.listen(port, "0.0.0.0"); // Listen on all interfaces for Railway
-  console.log(`🚀 Server running on port ${port}`);
+  const port = process.env.PORT ?? 3000;
+  await app.listen(port);
+  console.log(`🚀 GraphQL server running at http://localhost:${port}/graphql`);
 }
 
 bootstrap();
