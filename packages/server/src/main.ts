@@ -2,6 +2,14 @@ import "reflect-metadata";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   
@@ -18,4 +26,6 @@ async function bootstrap(): Promise<void> {
   console.log(`🚀 GraphQL server running at http://0.0.0.0:${port}/graphql`);
 }
 
-bootstrap();
+bootstrap().catch((err) => {
+  console.error("Failed to start server", err);
+});
